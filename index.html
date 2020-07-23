@@ -25,9 +25,9 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="iphn-minus-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="iphn-minus-btn" class="btn btn-default mr-2"><i class="fas fa-minus"></i></button>
                            <input id="iphn-count" type="text" class="form-control text-center" value="1">
-                           <button id="iphn-plus-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="iphn-plus-btn" class="btn btn-default ml-2"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$<span id="iphn-price">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
@@ -43,9 +43,9 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="cover-minus-btn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="cover-minus-btn" class="btn btn-default mr-2"><i class="fas fa-minus"></i></button>
                            <input id="cover-count" type="text" class="form-control text-center" value="1">
-                           <button id="cover-plus-btn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="cover-plus-btn" class="btn btn-default ml-2"><i class="fas fa-plus"></i></button>
 
                         </div>
                         <h5>$<span id="cover-price">59</span></h5>
@@ -79,53 +79,41 @@
    </section>
 </body>
 <script>
-   function Total(iphnPrice){
-      var coverPrice = document.getElementById('cover-price').innerHTML;
-      var coverPriceNumber = parseFloat(coverPrice);
-      var total = iphnPrice + coverPriceNumber;
-      document.getElementById('sub-total').innerHTML = total;
-      document.getElementById('total').innerHTML = total;
+   function Total(Price,unitId){
+        var itemPrice = document.getElementById(unitId).innerHTML;
+        var itemPriceNumber = parseFloat(itemPrice);
+        var total = Price + itemPriceNumber;
+        document.getElementById('sub-total').innerHTML = total;
+        document.getElementById('total').innerHTML = total;
    }
-   function Totalway(coverPrice){
-      var iphnPrice = document.getElementById('iphn-price').innerHTML;
-      var iphnPriceNumber = parseFloat(iphnPrice);
-      var total = iphnPriceNumber + coverPrice;
-      document.getElementById('sub-total').innerHTML = total;
-      document.getElementById('total').innerHTML = total;
-   }
-
-   document.getElementById('iphn-plus-btn').addEventListener('click', function (){
-        const iphnCount = document.getElementById('iphn-count').value;
-        const iphnCountNumber = parseFloat(iphnCount) + 1;
-        document.getElementById('iphn-count').value = iphnCountNumber;
+   function addUnitOneProduct(countId,priceId,i){
+        const iphnCount = document.getElementById(countId).value;
+        const iphnCountNumber = parseFloat(iphnCount) + i;
+        document.getElementById(countId).value = iphnCountNumber;
         const newIphnPrice = 1219 * iphnCountNumber;
-        document.getElementById('iphn-price').innerHTML = newIphnPrice;
-        Total(newIphnPrice)
+        document.getElementById(priceId).innerHTML = newIphnPrice;
+        Total(newIphnPrice,'cover-price')
+   }
+   function addUnitTwoProduct(countId,priceId,i){
+        const coverCount = document.getElementById(countId).value;
+        const coverCountNumber = parseFloat(coverCount) + i;
+        document.getElementById(countId).value = coverCountNumber;
+        const totalCoverPrice = 59 * coverCountNumber;
+        document.getElementById(priceId).innerHTML = totalCoverPrice;
+        Total(totalCoverPrice,'iphn-price')
+   }
+   document.getElementById('iphn-plus-btn').addEventListener('click', function (){
+        addUnitOneProduct('iphn-count','iphn-price',1)
    })
    document.getElementById('iphn-minus-btn').addEventListener('click', function (){
-        const iphnCount = document.getElementById('iphn-count').value;
-        const iphnCountNumber = parseFloat(iphnCount) - 1;
-        document.getElementById('iphn-count').value = iphnCountNumber;
-        const newIphnPrice = 1219 * iphnCountNumber;
-        document.getElementById('iphn-price').innerHTML = newIphnPrice;
-        Total(newIphnPrice)
+        addUnitOneProduct('iphn-count','iphn-price',-1)
    })
    
    document.getElementById('cover-plus-btn').addEventListener('click', function (){
-        const iphnCount = document.getElementById('cover-count').value;
-        const iphnCountNumber = parseFloat(iphnCount) + 1;
-        document.getElementById('cover-count').value = iphnCountNumber;
-        const newIphnPrice = 59 * iphnCountNumber;
-        document.getElementById('cover-price').innerHTML = newIphnPrice;
-        Totalway(newIphnPrice)
+        addUnitTwoProduct('cover-count','cover-price',1)
    })
    document.getElementById('cover-minus-btn').addEventListener('click', function (){
-        const iphnCount = document.getElementById('cover-count').value;
-        const iphnCountNumber = parseFloat(iphnCount) - 1;
-        document.getElementById('cover-count').value = iphnCountNumber;
-        const newIphnPrice = 59 * iphnCountNumber;
-        document.getElementById('cover-price').innerHTML = newIphnPrice;
-        Totalway(newIphnPrice)
+      addUnitTwoProduct('cover-count','cover-price',-1)
    })
 
 </script>

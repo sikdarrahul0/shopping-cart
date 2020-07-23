@@ -86,34 +86,26 @@
         document.getElementById('sub-total').innerHTML = total;
         document.getElementById('total').innerHTML = total;
    }
-   function addUnitOneProduct(countId,priceId,i){
-        const iphnCount = document.getElementById(countId).value;
-        const iphnCountNumber = parseFloat(iphnCount) + i;
-        document.getElementById(countId).value = iphnCountNumber;
-        const newIphnPrice = 1219 * iphnCountNumber;
-        document.getElementById(priceId).innerHTML = newIphnPrice;
-        Total(newIphnPrice,'cover-price')
-   }
-   function addUnitTwoProduct(countId,priceId,i){
-        const coverCount = document.getElementById(countId).value;
-        const coverCountNumber = parseFloat(coverCount) + i;
-        document.getElementById(countId).value = coverCountNumber;
-        const totalCoverPrice = 59 * coverCountNumber;
-        document.getElementById(priceId).innerHTML = totalCoverPrice;
-        Total(totalCoverPrice,'iphn-price')
+   function addUnitProduct(countId,priceId,i,unitPrice,unitId){
+        const Count = document.getElementById(countId).value;
+        const CountNumber = parseFloat(Count) + i;
+        document.getElementById(countId).value = CountNumber;
+        const Price = unitPrice * CountNumber;
+        document.getElementById(priceId).innerHTML = Price;
+        Total(Price,unitId)
    }
    document.getElementById('iphn-plus-btn').addEventListener('click', function (){
-        addUnitOneProduct('iphn-count','iphn-price',1)
+        addUnitProduct('iphn-count','iphn-price', 1, 1219, 'cover-price')
    })
    document.getElementById('iphn-minus-btn').addEventListener('click', function (){
-        addUnitOneProduct('iphn-count','iphn-price',-1)
+        addUnitProduct('iphn-count','iphn-price', -1, 1219, 'cover-price')
    })
    
    document.getElementById('cover-plus-btn').addEventListener('click', function (){
-        addUnitTwoProduct('cover-count','cover-price',1)
+        addUnitProduct('cover-count','cover-price', 1, 59, 'iphn-price')
    })
    document.getElementById('cover-minus-btn').addEventListener('click', function (){
-      addUnitTwoProduct('cover-count','cover-price',-1)
+        addUnitProduct('cover-count','cover-price',-1, 59, 'iphn-price')
    })
 
 </script>

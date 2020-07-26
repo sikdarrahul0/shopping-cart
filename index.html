@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
    <section>
       <div class="container">
          <div class="cart">
@@ -88,11 +87,14 @@
    }
    function addUnitProduct(countId,priceId,i,unitPrice,unitId){
         const Count = document.getElementById(countId).value;
-        const CountNumber = parseFloat(Count) + i;
+        var CountNumber = parseFloat(Count);
+        if(CountNumber > 0){
+        CountNumber = CountNumber + i;
         document.getElementById(countId).value = CountNumber;
         const Price = unitPrice * CountNumber;
         document.getElementById(priceId).innerHTML = Price;
         Total(Price,unitId)
+        }
    }
    document.getElementById('iphn-plus-btn').addEventListener('click', function (){
         addUnitProduct('iphn-count','iphn-price', 1, 1219, 'cover-price')
@@ -105,7 +107,7 @@
         addUnitProduct('cover-count','cover-price', 1, 59, 'iphn-price')
    })
    document.getElementById('cover-minus-btn').addEventListener('click', function (){
-        addUnitProduct('cover-count','cover-price',-1, 59, 'iphn-price')
+        addUnitProduct('cover-count','cover-price', -1, 59, 'iphn-price')
    })
 
 </script>
